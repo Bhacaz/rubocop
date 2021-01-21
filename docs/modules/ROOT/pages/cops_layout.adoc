@@ -728,7 +728,7 @@ end
 
 | Categories
 | `{"module_inclusion"=>["include", "prepend", "extend"]}`
-| 
+|
 
 | ExpectedOrder
 | `module_inclusion`, `constants`, `public_class_methods`, `initializer`, `public_methods`, `protected_methods`, `private_methods`
@@ -4178,6 +4178,38 @@ foo = if expression
 end
 ----
 
+==== SupportedTypes: ['if']
+
+[source,ruby]
+----
+# good
+foo =
+  if expression
+    'bar'
+  end
+
+# good
+foo = [1].map do |i|
+  i + 1
+end
+----
+
+==== SupportedTypes: ['block']
+
+[source,ruby]
+----
+# good
+foo = if expression
+  'bar'
+end
+
+# good
+foo =
+  [1].map do |i|
+    'bar' * i
+  end
+----
+
 === Configurable attributes
 
 |===
@@ -4186,6 +4218,10 @@ end
 | EnforcedStyle
 | `new_line`
 | `same_line`, `new_line`
+
+| SupportedTypes
+| `block`, `case`, `class`, `if`, `kwbegin`, `module`
+| Array
 |===
 
 === References
